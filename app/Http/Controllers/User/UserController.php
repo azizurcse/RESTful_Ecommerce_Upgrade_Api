@@ -15,7 +15,7 @@ class UserController extends ApiController
     public function index()
     {
         $users = User::all();
-        return $this->showall($users);
+        return $this->showAll($users);
         // return response()->json(['data'=>$users],200);
     }
 
@@ -101,14 +101,14 @@ class UserController extends ApiController
         {
             if(!$user->isVerified())
             {
-                return response()->json(['error'=>'You have not permission to access admin panel','code'=>409],409);
+                return $this->errorResponse('You have not permission to access admin panel',409);
             }
             $user->admin=$request->admin;
         }
 
         if(!$user->isDirty())
         {
-             return response()->json(['error'=>'You need to specify a different value update','code'=>422],422);
+             return $this->errorResponse('You need to specify a different value update',422);
         }
 
 
