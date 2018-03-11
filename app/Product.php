@@ -2,12 +2,17 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\seller;
 use App\Category;
 use App\transaction;
-use App\seller;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Product extends Model
 {
+    use SoftDeletes;
+    protected $dates=['deleted_at'];
+    
     const AVAILABLE_PRODUCT='available';
     const UNAVAILABLE_PRODUCT='unavailable';
 
