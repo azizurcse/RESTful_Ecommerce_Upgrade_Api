@@ -33,6 +33,10 @@ class ProductBuyerTransactionController extends ApiController
         {
             return $this->errorResponse('The buyer must be a verified user',409);
         }
+        if(!$product->seller->isVerified())
+        {
+            return $this->errorResponse('the seller must be a verified user',409);
+        }
         if(!$product->isAvailable())
         {
             return $this->errorResponse('The product is not available',409);
@@ -45,7 +49,13 @@ class ProductBuyerTransactionController extends ApiController
         return DB::transaction(function() use ($request, $product, $buyer)
         {
             $product->quantity-=$request->quantity;
-            $product->save();
+            if($product->quantity == 0 && $product->isAvailable())
+            {
+                $product->status = Product::UNAVAILABLE_PRODUCT;
+                $product->save();
+            }
+            // $product->save();
+           
             $transaction=Transaction::create([
                 'quantity'=>$request->quantity,
                 'buyer_id'=>$buyer->id,
@@ -54,6 +64,7 @@ class ProductBuyerTransactionController extends ApiController
             ]);
             return $this->showOne($transaction,201);
         });
+        
     }
 
     

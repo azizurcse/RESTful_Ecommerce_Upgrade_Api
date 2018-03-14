@@ -15,6 +15,7 @@ class ProductController extends ApiController
      */
     public function index()
     {
+    
         $products=Product::all();
         return $this->showAll($products);
     }
@@ -29,6 +30,11 @@ class ProductController extends ApiController
      */
     public function show(Product $product)
     {
+        // if($product->quantity == 0 && $product->isAvailable())
+        //     {
+        //         $product->status = Product::UNAVAILABLE_PRODUCT;
+        //         $product->save();
+        //     }
         return $this->showOne($product);
     }
 
