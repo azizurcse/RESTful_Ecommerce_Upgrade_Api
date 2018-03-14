@@ -8,7 +8,9 @@ use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 // use Illuminate\Foundation\Testing\HttpException;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+
 class SellerProductController extends ApiController
 {
     /**
@@ -85,6 +87,11 @@ class SellerProductController extends ApiController
                 return $this->errorResponse('An active product must have one category',409);
             }
         }
+        if($request->hasFile('image'))
+        {
+            Storage::delete($product->image);
+            $product->image=$request->image->store('');
+        }
         if($product->isClean)
         {
             return $this->errorResponse('You need to update specified items',422);
@@ -104,6 +111,7 @@ class SellerProductController extends ApiController
     {
        $this->checkSeller($seller, $product);
        $product->delete();
+       Storage::delete($product->image);
        return $this->showOne($product); 
     }
     protected function checkSeller(Seller $seller, Product $product)
