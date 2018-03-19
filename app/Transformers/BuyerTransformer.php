@@ -24,4 +24,18 @@ class BuyerTransformer extends TransformerAbstract
             'deletedDate'=>isset($buyer->deleted_at) ? (string) $buyer->deleted_at : null,
         ];
     }
+
+    public static function originalAttribute($index)
+    {
+        $attibutes=[
+            'identifier'=>'id',
+            'name'=>'name',
+            'email'=>'email',
+            'isVerified'=>'verified',
+            'creationDate'=>'created_at',
+            'lastDate'=>'updated_at',
+            'deletedDate'=>'deleted_at',
+        ];
+        return isset($attibutes[$index]) ? $attibutes[$index] : null;
+    } 
 }
