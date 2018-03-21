@@ -38,7 +38,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             'signature:X-Application-Name',
-            'throttle:5,1',
+            'throttle:10,1',
             'bindings',
         ],
     ];
