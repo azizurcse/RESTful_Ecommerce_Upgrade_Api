@@ -67,4 +67,22 @@ class ProductTransformer extends TransformerAbstract
         ];
         return isset($attibutes[$index]) ? $attibutes[$index] : null;
     }
+
+    public static function transformedAttribute($index)
+    {
+        $attibutes=[
+            'id'=>'identifier',
+            'name'=>'title',
+            'description'=>'details',
+            'verified'=>'isVerified',
+            'quantity'=>'stock',
+            'status'=>'situation',
+            'image'=>'picture',
+            'seller_id'=>'seller',
+            'created_at'=>'creationDate',
+            'updated_at'=>'lastDate',
+            'deleted_at'=>'deletedDate',
+        ];
+        return isset($attibutes[$index]) ? $attibutes[$index] : null;
+    }
 }
