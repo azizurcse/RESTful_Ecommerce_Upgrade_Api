@@ -8,6 +8,11 @@ use App\Http\Controllers\ApiController;
 
 class ProductTransactionController extends ApiController
 {
+
+    public function __construct()
+    {
+        parrent::__construct();
+    }
     /**
      * Display a listing of the resource.
      *
