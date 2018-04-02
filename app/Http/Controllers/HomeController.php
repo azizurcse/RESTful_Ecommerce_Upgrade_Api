@@ -28,6 +28,6 @@ class HomeController extends Controller
 
     public function getTokens()
     {
-        view('home.personal-tokens');
+       return view('home.personal-tokens');
     }
 }

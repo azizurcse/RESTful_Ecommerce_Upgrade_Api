@@ -1,4 +1,4 @@
-use Illuminate\Support\Facades\Auth;
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
